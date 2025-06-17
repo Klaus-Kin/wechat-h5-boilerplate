@@ -1,230 +1,196 @@
 'use strict';
 
-var autoprefixer = require('gulp-autoprefixer');
-var browserify = require('gulp-browserify');
-var browserSync = require('browser-sync').create();
-var concat = require('gulp-concat');
-var del = require('del');
-var gulp = require('gulp');
-var imagemin = require('gulp-imagemin');
-var inject = require('gulp-inject');
-var minifycss = require('gulp-minify-css');
-var notify = require('gulp-notify');
-var rename = require('gulp-rename');
-var runSequence = require('run-sequence');
-var sass = require('gulp-sass');
-var streamSeries = require('stream-series');
-var plumber = require('gulp-plumber');
-var uglify = require('gulp-uglify');
+const autoprefixer = require('gulp-autoprefixer');
+const browserify = require('gulp-browserify');
+const browserSync = require('browser-sync').create();
+const concat = require('gulp-concat');
+const del = require('del');
+const gulp = require('gulp');
+const { series, parallel, watch, src, dest } = gulp;
+const imagemin = require('gulp-imagemin');
+const inject = require('gulp-inject');
+const minifycss = require('gulp-minify-css');
+const notify = require('gulp-notify');
+const rename = require('gulp-rename');
+const dartSass = require('sass');
+const gulpSass = require('gulp-sass');
+const sass = gulpSass(dartSass);
+const plumber = require('gulp-plumber');
+const uglify = require('gulp-uglify');
+const merge = require('merge-stream');
 
-var vendors = require('./config/vendors');
+const vendors = require('./config/vendors');
 
-
-
-/* ============================================================================================================
-============================================ For Development ==================================================
-=============================================================================================================*/
-
+// ============================================================================================================
+// ============================================ For Development ================================================
+// ============================================================================================================
 
 // copy fonts from node_modules and app/src/fonts to app/dist/fonts
-gulp.task('publish-fonts', function () {
-    var fonts = vendors.fonts.concat([
+function publishFonts() {
+    const fonts = vendors.fonts.concat([
         'app/src/fonts/*'
     ]);
 
-    return gulp.src(fonts)
-        .pipe(gulp.dest('app/dist/fonts'));
-});
+    return src(fonts, { allowEmpty: true })
+        .pipe(dest('app/dist/fonts'));
+}
 
 // optimize images under app/src/images and save the results to app/dist/images
-gulp.task('publish-images', function () {
-    var imagesWithoutSVG = ['app/src/images/**/*', '!app/src/images/**/*.svg'];
-    var SVGs = 'app/src/images/**/*.svg';
-
-    return streamSeries(
-        gulp.src(imagesWithoutSVG)
-            .pipe(imagemin({
-                optimizationLevel: 3,
-                progressive: true,
-                interlaced: true
-            })),
-        gulp.src(SVGs)
-    )
-        .pipe(gulp.dest('app/dist/images'));
-});
+function publishImages() {
+    // 修复 glob 模式错误
+    return src([
+        'app/src/images/**/*',
+        '!app/src/images/**/*.svg', // 排除 SVG
+        'app/src/images/**/*.svg'   // 单独包含 SVG
+    ], { allowEmpty: true })
+        .pipe(imagemin({
+            optimizationLevel: 3,
+            progressive: true,
+            interlaced: true,
+            // 添加 SVG 优化配置
+            svgoPlugins: [{ removeViewBox: false }]
+        }))
+        .pipe(dest('app/dist/images'));
+}
 
 // copy audios from app/src/audios to app/dist/audios
-gulp.task('publish-audios', function () {
-    return gulp.src('app/src/audios/*')
-        .pipe(gulp.dest('app/dist/audios'));
-});
+function publishAudios() {
+    return src('app/src/audios/*', { allowEmpty: true })
+        .pipe(dest('app/dist/audios'));
+}
 
-// compile sass, concat stylesheets in the right order,
-// and save as app/dist/stylesheets/bundle.css
-gulp.task('publish-css', function () {
-    var cssVendors = vendors.stylesheets;
+// compile sass, concat stylesheets in the right order
+function publishCss() {
+    const cssVendors = vendors.stylesheets;
 
-    return streamSeries(
-        gulp.src(cssVendors),
-        gulp.src('app/src/scss/main.scss')
-            .pipe(plumber({
-                errorHandler: errorAlert
-            }))
-            .pipe(sass({
-                outputStyle: 'expanded'
-            }))
-            .pipe(autoprefixer())
-    )
+    // 使用 merge-stream 正确处理多个源
+    const vendorStream = src(cssVendors, { allowEmpty: true });
+    const sassStream = src('app/src/scss/main.scss', { allowEmpty: true })
+        .pipe(plumber({ errorHandler: errorAlert }))
+        .pipe(sass({ outputStyle: 'expanded' }))
+        .pipe(autoprefixer());
+
+    return merge(vendorStream, sassStream)
         .pipe(concat('bundle.css'))
-        .pipe(gulp.dest('app/dist/stylesheets'))
+        .pipe(dest('app/dist/stylesheets'))
         .pipe(browserSync.stream());
-});
+}
 
-// bundle CommonJS modules under app/src/javascripts, concat javascripts in the right order,
-// and save as app/dist/javascripts/bundle.js
-gulp.task('publish-js', function () {
-    var jsVendors = vendors.javascripts;
+// bundle and concat javascripts
+function publishJs() {
+    const jsVendors = vendors.javascripts;
 
-    return streamSeries(
-        gulp.src(jsVendors),
-        gulp.src('app/src/javascripts/main.js')
-            .pipe(plumber({
-                errorHandler: errorAlert
-            }))
-            .pipe(browserify({
-                transform: ['partialify'],
-                debug: true
-            }))
-        )
+    // 使用 merge-stream 正确处理多个源
+    const vendorStream = src(jsVendors, { allowEmpty: true });
+    const jsStream = src('app/src/javascripts/main.js', { allowEmpty: true })
+        .pipe(plumber({ errorHandler: errorAlert }))
+        .pipe(browserify({
+            transform: ['partialify'],
+            debug: true
+        }));
+
+    return merge(vendorStream, jsStream)
         .pipe(concat('bundle.js'))
-        .pipe(gulp.dest('app/dist/javascripts'));
-});
+        .pipe(dest('app/dist/javascripts'));
+}
 
-// inject app/dist/stylesheets/bundle.css and app/dist/javascripts/bundle.js into app/src/index.html
-// and save as app/dist/index.html
-gulp.task('inject', function () {
-    var target = gulp.src('app/src/index.html');
-    var assets = gulp.src([
+// inject assets into index.html
+function injectTask() {
+    const target = src('app/src/index.html');
+    const assets = src([
         'app/dist/stylesheets/bundle.css',
         'app/dist/javascripts/bundle.js'
-    ], {
-        read: false
-    });
+    ], { read: false, allowEmpty: true });
+
     return target
         .pipe(inject(assets, {
             ignorePath: 'app/dist/',
             addRootSlash: false,
             removeTags: true
         }))
-        .pipe(gulp.dest('app/dist'));
-});
+        .pipe(dest('app/dist'));
+}
 
-// watch files and run corresponding task(s) once files are added, removed or edited.
-gulp.task('watch', function () {
+// watch files and run corresponding tasks
+function watchTask(done) {
     browserSync.init({
         server: {
             baseDir: 'app/dist'
-        }
+        },
+      // 添加这行禁用连接提示弹窗
+      notify: false
     });
 
-    gulp.watch('app/src/index.html', ['inject']);
-    gulp.watch('app/src/scss/**/*.scss', ['publish-css']);
-    gulp.watch('app/src/javascripts/**/*', ['publish-js']);
-    gulp.watch('app/src/fonts/**/*', ['publish-fonts']);
-    gulp.watch('app/src/images/**/*', ['publish-images']);
-    gulp.watch('app/src/audios/**/*', ['publish-audios']);
+    watch('app/src/index.html', series(injectTask, reloadBrowser));
+    watch('app/src/scss/**/*.scss', publishCss);
+    watch('app/src/javascripts/**/*', series(publishJs, injectTask, reloadBrowser));
+    watch('app/src/fonts/**/*', series(publishFonts, reloadBrowser));
+    watch('app/src/images/**/*', series(publishImages, reloadBrowser));
+    watch('app/src/audios/**/*', series(publishAudios, reloadBrowser));
 
-    gulp.watch('app/dist/index.html').on('change', browserSync.reload);
-    gulp.watch('app/dist/javascripts/*').on('change', browserSync.reload);
-    gulp.watch('app/dist/fonts/*').on('change', browserSync.reload);
-    gulp.watch('app/dist/images/*').on('change', browserSync.reload);
-});
+    done();
+}
+
+function reloadBrowser(done) {
+    browserSync.reload();
+    done();
+}
 
 // delete files under app/dist
-gulp.task('clean-files', function(cb) {
+function cleanFiles() {
     return del([
         'app/dist/**/*'
-    ], cb);
-});
+    ], { force: true });
+}
 
-// delete cache
-// gulp.task('clean-cache', function (cb) {
-//     return cache.clearAll(cb)
-// });
+// ============================================================================================================
+// ================================================= For Production ============================================
+// ============================================================================================================
 
-// development workflow task
-gulp.task('dev', function (cb) {
-    runSequence(['clean-files'], ['publish-fonts', 'publish-images', 'publish-audios', 'publish-css', 'publish-js'], 'inject', 'watch', cb);
-});
-
-// default task
-gulp.task('default', ['dev']);
-
-
-
-/* ============================================================================================================
-================================================= For Production ==============================================
-=============================================================================================================*/
-
-// minify app/dist/stylesheets/bundle.css and save as app/dist/stylesheets/bundle.min.css
-gulp.task('minify-css', function () {
-    return gulp.src('app/dist/stylesheets/bundle.css')
+// minify CSS
+function minifyCss() {
+    return src('app/dist/stylesheets/bundle.css', { allowEmpty: true })
         .pipe(minifycss())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(gulp.dest('app/dist/stylesheets'));
-});
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(dest('app/dist/stylesheets'));
+}
 
-// uglify app/dist/javascripts/bundle.js and save as app/dist/javascripts/bundle.min.js
-gulp.task('uglify-js', function () {
-    return gulp.src('app/dist/javascripts/bundle.js')
+// uglify JS
+function uglifyJs() {
+    return src('app/dist/javascripts/bundle.js', { allowEmpty: true })
         .pipe(uglify())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(gulp.dest('app/dist/javascripts'));
-});
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(dest('app/dist/javascripts'));
+}
 
-// inject app/dist/stylesheets/bundle.min.css and app/dist/javascripts/bundle.min.js into app/src/index.html
-// and save as app/dist/index.html
-gulp.task('inject-min', function () {
-    var target = gulp.src('app/src/index.html');
-    var assets = gulp.src([
+// inject minified assets
+function injectMin() {
+    const target = src('app/src/index.html');
+    const assets = src([
         'app/dist/stylesheets/bundle.min.css',
         'app/dist/javascripts/bundle.min.js'
-    ], {
-        read: false
-    });
+    ], { read: false, allowEmpty: true });
+
     return target
         .pipe(inject(assets, {
             ignorePath: 'app/dist/',
             addRootSlash: false,
             removeTags: true
         }))
-        .pipe(gulp.dest('app/dist'));
-});
+        .pipe(dest('app/dist'));
+}
 
-// delete app/dist/stylesheets/bundle.css and app/dist/javascripts/bundle.js
-gulp.task('del-bundle', function (cb) {
+// delete unminified bundles
+function delBundle() {
     return del([
         'app/dist/stylesheets/bundle.css',
         'app/dist/javascripts/bundle.js'
-    ], cb);
-});
+    ], { force: true });
+}
 
-// run 'minify-css' and 'uglify-js' at the same time
-// inject the minified files to index.html
-// delete unminified files
-gulp.task('prod',  function (cb) {
-    runSequence(['minify-css', 'uglify-js'], ['inject-min', 'del-bundle'], cb);
-});
-
-
-
-/* ===============================================
- ================== Functions ====================
- ================================================*/
+// ===============================================
+// ================== Functions ==================
+// ===============================================
 
 // handle errors
 function errorAlert(error){
@@ -236,3 +202,34 @@ function errorAlert(error){
     console.log(error.toString());
     this.emit('end');
 }
+
+// ===============================================
+// ================== Task Exports ===============
+// ===============================================
+
+// development workflow task
+exports.dev = series(
+    cleanFiles,
+    parallel(
+        publishFonts,
+        publishImages,
+        publishAudios,
+        publishCss,
+        publishJs
+    ),
+    injectTask,
+    watchTask
+);
+
+// production build task
+exports.prod = series(
+    minifyCss,
+    uglifyJs,
+    parallel(
+        injectMin,
+        delBundle
+    )
+);
+
+// default task
+exports.default = exports.dev;
