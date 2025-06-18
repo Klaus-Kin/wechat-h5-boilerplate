@@ -31,7 +31,9 @@
 <div class="swiper-container">
     <div class="swiper-wrapper">
         <div class="swiper-slide slide-1">
-            <div class="item-image animated" data-ani-name="slideInLeft" data-ani-duration="1s" data-ani-delay="0s"></div>
+            <!-- data-ani-name（动画名称）,data-ani-duration（动画执行时间），data-ani-delay（动画延迟时间）-->
+            <!-- 设置2.1s延迟时间是因为在main.js中的read方法中,手动添加了2s的延迟时间，保证动画执行时间不冲突。 -->
+            <div class="item-image animated" data-ani-name="slideInLeft" data-ani-duration="1s" data-ani-delay="2.1s"></div>
             <p class="item-text animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0.3s">I'm a coder!</p>
         </div>
         <div class="swiper-slide slide-2">

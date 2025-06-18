@@ -62,7 +62,9 @@
             }
         });
 
-        // hide loading animation since everything is ready
-        $('.loading-overlay').slideUp();
+        // 在一切都已准备就绪后,再延迟隐藏加载动画;因为加载动画也挺好看的
+        setTimeout(function () {
+          $('.loading-overlay').slideUp();
+        },2000)
     });
 })();
