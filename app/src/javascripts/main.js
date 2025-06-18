@@ -35,17 +35,17 @@
                 stretch: 0,
                 depth: 300,
                 modifier: 1,
-                slideShadows: false     // do disable shadows for better performance
+                slideShadows: false     // 禁用阴影以获得更好的性能
             },
             flip: {
                 limitRotation: true,
-                slideShadows: false     // do disable shadows for better performance
+                slideShadows: false     // 禁用阴影以获得更好的性能
             },
             onInit: function (swiper) {
-                animationControl.initAnimationItems();  // get items ready for animations
-                animationControl.playAnimation(swiper); // play animations of the first slide
+                animationControl.initAnimationItems();  // 为动画准备项目
+                animationControl.playAnimation(swiper); // 播放第一张幻灯片的动画
             },
-            onTransitionStart: function (swiper) {     // on the last slide, hide .btn-swipe
+            onTransitionStart: function (swiper) {     // 在最后一张幻灯片上，隐藏 .btn-swipe
                 if (swiper.activeIndex === swiper.slides.length - 1) {
                     $upArrow.hide();
                 } else {
