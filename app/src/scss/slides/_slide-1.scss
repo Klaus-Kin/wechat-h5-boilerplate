@@ -1,51 +1,94 @@
-.slide-1 {
-    background-image: url('../images/1.webp');
-    .item-text-1 {
-        width: 18rem;
-        color: rgba(128, 128, 128, 0.9);
-        font-size: 1.2rem;
-        font-weight: bold;
-        position: absolute;
-        top: 18.5rem;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        text-align: center;
-    }
+/* 声明毛笔字体 */
+@font-face {
+  font-family: 'myName';
+  src: url('../fonts/my-name-font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
-  .item-text-2 {
+.slide-1 {
+  background-image: url('../images/1.webp');
+
+  .item-text-1 {
     width: 18rem;
     color: rgba(128, 128, 128, 0.9);
     font-size: 1.2rem;
     font-weight: bold;
+    font-family: 'Dancing Script', cursive; // 一种优雅的手写草书字体，常用于婚礼、邀请函等浪漫场合
     position: absolute;
-    top: 20.5rem;
+    top: 18.5rem;
     left: 0;
     right: 0;
     margin: 0 auto;
     text-align: center;
   }
 
-  .item-text-3 {
+  .item-text-2 {
     width: 18rem;
     color: rgba(128, 128, 128, 0.9);
-    font-size: 1.2rem;
+    font-size: 2.2rem;
     font-weight: bold;
+    font-family: 'Great Vibes', cursive; // 优雅流畅的婚礼专用字体
     position: absolute;
-    top: 22.5rem;
+    top: 19.5rem;
     left: 0;
     right: 0;
     margin: 0 auto;
     text-align: center;
+  }
+
+  .item-text-3-1 {
+    width: 18rem;
+    color: rgba(128, 128, 128, 0.9);
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'myName', '华文楷体', cursive; // 多级回退
+    position: absolute;
+    top: 23.5rem;
+    left: 5.4rem;
+    right: 0;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .item-text-3-2 {
+
+    color: rgba(210, 121, 165, 0.9);
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'myName', '华文楷体', cursive; // 多级回退
+    position: absolute;
+    top: 23.5rem;
+    left: 0;
+    right: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .item-text-3-3 {
+    width: 18rem;
+    color: rgba(128, 128, 128, 0.9);
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'myName', '华文楷体', cursive; // 多级回退
+    position: absolute;
+    top: 23.5rem;
+    left: 10.1rem;
+    right: 0;
+    margin: 0 auto;
+    text-align: left;
   }
 
   .item-text-4 {
     width: 18rem;
     color: rgba(128, 128, 128, 0.9);
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     font-weight: bold;
+    //font-family: 'Montserrat', sans-serif;  // 简洁现代的无衬线字体
+    font-family: 'myName', '华文楷体', cursive; // 多级回退
     position: absolute;
-    top: 24.5rem;
+    top: 25.5rem;
     left: 0;
     right: 0;
     margin: 0 auto;

@@ -2,63 +2,80 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>💕~我们订婚啦~💍</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- Add your keywords and description here for SEO. -->
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+  <meta charset="UTF-8">
+  <title>💕~我们订婚啦~💍</title>
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport">
+  <!-- Add your keywords and description here for SEO. -->
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+  <link href="images/favicon.png" rel="shortcut icon" type="image/png"/>
+  <!-- 在 <head> 标签内添加 优雅的手写草书字体 -->
+  <!-- 合并字体请求 (Dancing Script + Great Vibes + Montserrat) -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Montserrat:wght@500&display=swap"
+        rel="stylesheet">
 
-    <!-- 如果您需要 Apple Touch 图标，请取消注释。 -->
-    <!--
-    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
-    -->
+  <!-- 如果您需要 Apple Touch 图标，请取消注释。 -->
+  <!--
+  <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+  -->
 
-    <!-- 不要删除它。它是开发工作流程所必需的。 -->
-    <!-- inject:css -->
-    <!-- endinject -->
+  <!-- 不要删除它。它是开发工作流程所必需的。 -->
+  <!-- inject:css -->
+  <!-- endinject -->
 </head>
 
 <body>
 <div class="loading-overlay">
-    <img src="images/loading.svg">
+  <img src="images/loading.svg">
 </div>
 
 <div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide slide-1">
-            <!-- data-ani-name（动画名称）,data-ani-duration（动画执行时间），data-ani-delay（动画延迟时间）-->
-            <!-- 设置2.1s延迟时间是因为在main.js中的read方法中,手动添加了2s的延迟时间，保证动画执行时间不冲突。 -->
-            <p class="item-text-1 animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="2.1s">Invitation</p>
-            <p class="item-text-2 animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="3s">B e t r o t h a l</p>
-            <p class="item-text-3 animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="4s">金圣聪 & 吴淑霞</p>
-            <p class="item-text-4 animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="5s">2025年10月18日</p>
-        </div>
-        <div class="swiper-slide slide-2">
-            <div class="item-image animated" data-ani-name="bounceInDown" data-ani-duration="1s" data-ani-delay="0s"></div>
-            <p class="item-text animated" data-ani-name="bounceInUp" data-ani-duration="1s" data-ani-delay="0.3s">I'm a frontend developer!</p>
-        </div>
-        <div class="swiper-slide slide-3">
-            <div class="item-image animated" data-ani-name="flipInX" data-ani-duration="1s" data-ani-delay="0s"></div>
-            <p class="item-text animated" data-ani-name="flipInY" data-ani-duration="1s" data-ani-delay="0.3s">I'm a javascript newbie!</p>
-        </div>
+  <div class="swiper-wrapper">
+    <!-- 第一页 -->
+    <div class="swiper-slide slide-1">
+      <!-- data-ani-name（动画名称）,data-ani-duration（动画执行时间），data-ani-delay（动画延迟时间）-->
+      <!-- 设置2.1s延迟时间是因为在main.js中的read方法中,手动添加了2s的延迟时间，保证动画执行时间不冲突。 -->
+      <p class="item-text-1 animated" data-ani-delay="2.1s" data-ani-duration="1s" data-ani-name="rotateIn">
+        Invitation</p>
+      <p class="item-text-2 animated" data-ani-delay="3s" data-ani-duration="1s" data-ani-name="flip">B e t r o
+        t h a l</p>
+      <p class="item-text-3-1 animated" data-ani-delay="4s" data-ani-duration="5s" data-ani-name="zoomInLeft">金圣聪</p>
+      <p class="item-text-3-2 animated" data-ani-delay="4s" data-ani-duration="3s" data-ani-name="fadeInUpBig"> & </p>
+      <p class="item-text-3-3 animated" data-ani-delay="4s" data-ani-duration="6s" data-ani-name="zoomInRight">
+        吴淑霞</p>
+      <p class="item-text-4 animated" data-ani-delay="5s" data-ani-duration="1s" data-ani-name="jackInTheBox">
+        2025 年 10 月 18 日</p>
     </div>
+
+    <!-- 第二页 -->
+    <div class="swiper-slide slide-2">
+      <div class="item-image animated" data-ani-delay="0s" data-ani-duration="1s" data-ani-name="bounceInDown"></div>
+      <p class="item-text animated" data-ani-delay="0.3s" data-ani-duration="1s" data-ani-name="bounceInUp">I'm a
+        frontend developer!</p>
+    </div>
+
+    <!-- 第三页 -->
+    <div class="swiper-slide slide-3">
+      <div class="item-image animated" data-ani-delay="0s" data-ani-duration="1s" data-ani-name="flipInX"></div>
+      <p class="item-text animated" data-ani-delay="0.3s" data-ani-duration="1s" data-ani-name="flipInY">I'm a
+        javascript newbie!</p>
+    </div>
+  </div>
 </div>
 
 <button class="up-arrow">
-    <i class="icon-angle-double-up"></i>
+  <i class="icon-angle-double-up"></i>
 </button>
 
 <button class="btn-music">
-    <i class="icon-note"></i>
+  <i class="icon-note"></i>
 </button>
 
 <audio loop>
-    <source src="audios/background.mp3" type="audio/mpeg">
+  <source src="audios/background.mp3" type="audio/mpeg">
 </audio>
 
 <!-- Don't delete this. It's needed for development workflow. -->

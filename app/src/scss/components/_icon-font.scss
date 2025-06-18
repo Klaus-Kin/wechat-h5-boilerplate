@@ -8,8 +8,9 @@
   font-weight: normal;
   font-style: normal;
 }
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+
+/* Chrome 黑客：SVG 在 Windozze 中渲染得更流畅。100% 魔法，如果需要，请取消评论。 */
+/* 请注意，这将破坏提示！在其他作系统中，字体将不会像它应该的那样清晰 */
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
