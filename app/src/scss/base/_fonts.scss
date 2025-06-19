@@ -1,0 +1,12 @@
+/* 声明爱字体 */
+@font-face {
+  font-family: 'love';
+  src: url('../fonts/love.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.custom-font-love {
+  font-family: 'love', '华文楷体', cursive; // 多级回退
+}

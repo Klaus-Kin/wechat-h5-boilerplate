@@ -3,7 +3,7 @@ module.exports = {
         'node_modules/normalize.css/normalize.css',
         'node_modules/swiper/dist/css/swiper.css',
         'node_modules/animate.css/animate.css',
-        // if you need font-awesome
+      // 如果你需要 font-awesome
         // node_modules/font-awesome/css/font-awesome.css
         
     ],
@@ -14,7 +14,7 @@ module.exports = {
     ],
 
     fonts: [
-        // if you need font-awesome
+      // 如果你需要 font-awesome
         // 'node_modules/font-awesome/fonts/*'
     ]
 };

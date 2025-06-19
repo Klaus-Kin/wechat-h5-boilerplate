@@ -1,11 +1,4 @@
-/* 声明毛笔字体 */
-@font-face {
-  font-family: 'love';
-  src: url('../fonts/love.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+@import '../base/fonts';
 
 .slide-1 {
   background-image: url('../images/1.webp');
@@ -43,7 +36,7 @@
     color: rgba(128, 128, 128, 0.9);
     font-size: 1.2rem;
     font-weight: bold;
-    font-family: 'love', '华文楷体', cursive; // 多级回退
+    @extend .custom-font-love;
     position: absolute;
     top: 23.5rem;
     left: 0;
@@ -57,7 +50,7 @@
     color: rgba(210, 121, 165, 0.9);
     font-size: 1.2rem;
     font-weight: bold;
-    font-family: 'love', '华文楷体', cursive; // 多级回退
+    @extend .custom-font-love;
     position: absolute;
     top: 23.5rem;
     left: 0;
@@ -71,7 +64,7 @@
     color: rgba(128, 128, 128, 0.9);
     font-size: 1.2rem;
     font-weight: bold;
-    font-family: 'love', '华文楷体', cursive; // 多级回退
+    @extend .custom-font-love;
     position: absolute;
     top: 23.5rem;
     left: 0;
@@ -85,7 +78,7 @@
     color: rgba(128, 128, 128, 0.9);
     font-size: 0.8rem;
     font-weight: bold;
-    font-family: 'love', '华文楷体', cursive; // 多级回退
+    @extend .custom-font-love;
     position: absolute;
     top: 25.5rem;
     left: 0;
