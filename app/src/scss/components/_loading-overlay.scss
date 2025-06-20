@@ -1,3 +1,4 @@
+@import '../base/fonts';
 @charset "UTF-8"; // 声明文件字符编码为UTF-8，确保特殊字符正确解析
 
 /**
@@ -5,27 +6,105 @@
  * 用于在页面加载时显示半透明遮罩和居中加载动画
  */
 .loading-overlay {
-    position: fixed;  // 固定定位，脱离文档流,确保覆盖层独立于页面滚动
-    width: 100%;      // 覆盖整个视口宽度
-    height: 100%;     // 覆盖整个视口高度
+  position: fixed; // 固定定位，脱离文档流,确保覆盖层独立于页面滚动
+  width: 100%; // 覆盖整个视口宽度
+  height: 100%; // 覆盖整个视口高度
   background-color: rgba(255, 255, 255, 0.95); // 白色背景（可改为半透明色如rgba(255,255,255,0.8)）
 
-    z-index: 9999;    // 确保覆盖所有其他页面元素
+  z-index: 9999; // 确保覆盖所有其他页面元素
 
-    /**
-    * 加载动画图片样式
-    * 在覆盖层内居中显示加载图标
-    */
-    img {
-        width: 10rem;     // 图片宽度（基于根字体大小）
-        height: 10rem;    // 图片高度（保持正方形）
-        position: absolute;     // 相对于.loading-overlay绝对定位
+  .spinner {
+    width: 10rem; // 图片宽度（基于根字体大小）
+    height: 10rem; // 图片高度（保持正方形）
+    position: absolute; // 相对于.loading-overlay绝对定位
 
-        margin: auto;     // 水平居中关键属性
-        // 四方向0定位 + margin:auto 实现完美居中
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    margin: auto; // 水平居中关键属性
+    // 四方向0定位 + margin:auto 实现完美居中
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+  }
+
+  .dot1, .dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #333;
+    border-radius: 100%;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+
+  .dot1 {
+    background-image: url('../images/icon-0.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+    background-image: url('../images/icon-0.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  @-webkit-keyframes sk-rotate {
+    100% {
+      -webkit-transform: rotate(360deg)
     }
+  }
+  @keyframes sk-rotate {
+    100% {
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg)
+    }
+  }
+
+  @-webkit-keyframes sk-bounce {
+    0%, 100% {
+      -webkit-transform: scale(0.0)
+    }
+    50% {
+      -webkit-transform: scale(1.0)
+    }
+  }
+
+  @keyframes sk-bounce {
+    0%, 100% {
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    }
+    50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
+
+  .load-text {
+    width: 18rem;
+    position: absolute;
+    text-align: center;
+    margin: auto; // 水平居中关键属性
+    // 四方向0定位 + margin:auto 实现完美居中
+    top: 80%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: rgba(128, 128, 128, 0.9);
+    font-size: 1.2rem;
+    font-weight: bold;
+    @extend .custom-font-love;
+  }
 }
