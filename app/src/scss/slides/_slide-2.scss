@@ -8,7 +8,7 @@
     width: 90%;
     height: 80%;
     background-color: white;
-    top: 4rem;
+    top: 3.7rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -55,7 +55,7 @@
       top: 23rem;
       left: 0;
       right: 0;
-      margin: 1% auto;
+      margin: 0 auto;
       text-align: center;
     }
 
@@ -66,10 +66,10 @@
       font-weight: bold;
       @extend .custom-font-love;
       position: absolute;
-      top: 25rem;
+      top: 24.5rem;
       left: 0;
       right: 0;
-      margin: 1% auto;
+      margin: 0 auto;
       text-align: center;
     }
   }
