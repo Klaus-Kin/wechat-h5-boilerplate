@@ -1,28 +1,77 @@
+@import '../base/fonts';
+
 .slide-2 {
-    background-color: #5cc2f1;
-    .item-image {
-        width: 18rem;
-        height: 18rem;
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        position: absolute;
-        top: 4rem;
-        left: 0;
-        right: 0;
-        margin: auto;
-        background-image: url('../images/github-2.png');
+  background-image: url('../images/2-0.webp');
+
+  .slide-2-inbox {
+    position: absolute;
+    width: 90%;
+    height: 80%;
+    background-color: white;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    .item-image-2-1 {
+      width: 90%;
+      height: 15rem;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 1%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background-image: url('../images/2-1.webp');
     }
-    .item-text {
-        width: 18rem;
-        color: #fff;
-        font-size: 1.2rem;
-        font-weight: bold;
-        position: absolute;
-        top: 24rem;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        text-align: center;
+
+    .item-text-2-1 {
+      width: 100%;
+      color: rgba(128, 128, 128, 0.9);
+      font-size: 1rem;
+      font-weight: normal;
+      @extend .custom-font-love;
+      position: absolute;
+      top: 15.5rem;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      text-align: center;
     }
+
+    .item-text-title {
+      font-weight: bold;
+    }
+
+    .item-text-2-2 {
+      width: 100%;
+      color: rgba(128, 128, 128, 0.9);
+      font-size: 1.2rem;
+      font-weight: bold;
+      @extend .custom-font-love;
+      position: absolute;
+      top: 23rem;
+      left: 0;
+      right: 0;
+      margin: 1% auto;
+      text-align: center;
+    }
+
+    .item-text-2-3 {
+      width: 100%;
+      color: rgba(128, 128, 128, 0.9);
+      font-size: 1.2rem;
+      font-weight: bold;
+      @extend .custom-font-love;
+      position: absolute;
+      top: 25rem;
+      left: 0;
+      right: 0;
+      margin: 1% auto;
+      text-align: center;
+    }
+  }
+
 }
