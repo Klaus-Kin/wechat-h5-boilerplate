@@ -1,28 +1,77 @@
+@import '../base/fonts';
+
 .slide-3 {
-    background-color: #9993c1;
-    .item-image {
-        width: 18rem;
-        height: 18rem;
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        position: absolute;
-        top: 4rem;
-        left: 0;
-        right: 0;
-        margin: auto;
-        background-image: url('../images/github-3.png');
-    }
-    .item-text {
-        width: 18rem;
-        color: #fff;
-        font-size: 1.2rem;
-        font-weight: bold;
-        position: absolute;
-        top: 24rem;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        text-align: center;
-    }
+  background-image: url('../images/3-1.webp');
+}
+
+//以下是3+4页的公共属性
+.slide-bg {
+  background: linear-gradient(
+                  to top,
+                  rgba(255, 255, 255, 1) 0%,
+                  rgba(255, 255, 255, 0.9) 80%,  /* 中间过渡 */
+                  rgba(255, 255, 255, 0) 100%
+  );
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0; /* 关键：固定在底部 */
+}
+
+.slide-newbie-avatar {
+  background-image: url('../images/3-2.webp');
+  background-size: cover; /* 确保图片覆盖整个容器 */
+  background-position: center; /* 图片居中 */
+  background-repeat: no-repeat; /* 防止图片重复 */
+
+  width: 9.5rem;
+  height: 9.5rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 12.5rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+}
+
+.slide-newbie{
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  @extend .custom-font-love;
+
+  position: absolute;
+  top: 23rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.slide-newbie-name{
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  @extend .custom-font-love;
+
+  position: absolute;
+  top: 25rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.slide-newbie-describe{
+  color: black;
+  font-size: 1rem;
+  @extend .custom-font-love;
+
+  position: absolute;
+  top: 28rem;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  text-align: center;
 }
