@@ -1,0 +1,85 @@
+@import '../base/fonts';
+
+.slide-6 {
+  background-color: white;
+
+  .slide-6-0 {
+    background-image: url('../images/6-0.png');
+    background-size: 80%;
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 8vh;
+    margin-right: auto; // 靠左对齐的关键
+    margin-left: 0;
+    margin-top: 2rem;
+  }
+
+  .horizontalAlignment{
+    background-color: white;
+    display: flex; // 使用 Flex 布局
+    flex-direction: row; // 水平排列
+    align-items: flex-start; // 顶部对齐
+    justify-content: space-between; // 均匀分布空间
+  }
+
+  .slide-6-1 {
+    background-image: url('../images/6-1.jpeg');
+    background-size: 90%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 25vh;
+    margin-left: 0.5rem;
+  }
+
+  .slide-6-2 {
+    background-image: url('../images/6-2.jpeg');
+    background-size: 90%;
+    background-repeat: no-repeat;
+    width: 98%;
+    height: 25vh;
+  }
+
+  .slide-6-3 {
+    background-image: url('../images/6-3.jpeg');
+    background-size: 45%;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40vh;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .slide-6-4 {
+    background-image: url('../images/6-4.jpeg');
+    background-size: 45%;
+    background-position: right;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 25vh;
+    top: 14rem;
+    right: 0.8rem;
+  }
+
+  .slide-6-5 {
+    background-image: url('../images/6-5.png');
+    background-size: 45%;
+    background-position: right;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 25vh;
+    top: 20rem;
+    right: 0.8rem;
+  }
+
+  .slide-6-6 {
+    background-image: url('../images/6-6.webp');
+    background-size: 45%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 10vh;
+  }
+}
