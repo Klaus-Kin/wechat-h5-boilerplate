@@ -19,11 +19,9 @@
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
-      position: absolute;
-      top: 1%;
       left: 0;
       right: 0;
-      margin: auto;
+      margin: 1% auto;
       background-image: url('../images/2-1.webp');
     }
 
@@ -33,7 +31,6 @@
       font-size: 1rem;
       font-weight: normal;
       @extend .custom-font-love;
-      position: absolute;
       top: 52%;
       left: 0;
       right: 0;
@@ -51,11 +48,10 @@
       font-size: 1rem;
       font-weight: bold;
       @extend .custom-font-love;
-      position: absolute;
       top: 78%;
       left: 0;
       right: 0;
-      margin: 0 auto;
+      margin: 1rem auto auto auto;
       text-align: center;
     }
 
@@ -65,11 +61,10 @@
       font-size: 1rem;
       font-weight: bold;
       @extend .custom-font-love;
-      position: absolute;
       top: 83%;
       left: 0;
       right: 0;
-      margin: 0 auto;
+      margin: 1rem auto auto auto;
       text-align: center;
     }
   }
