@@ -1,0 +1,47 @@
+@import '../base/fonts';
+
+.slide-8 {
+  background-image: url('../images/8-top.jpeg');
+  background-size: 100%;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 100%;
+
+  .slide-8-bg{
+    background-image: url('../images/end-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .slide-8-en {
+    background-image: url('../images/8-en.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center top;
+    position: absolute;
+    width: 100%;
+    height: 20vh;
+    top: 40vh;
+  }
+
+  .slide-8-text-area {
+    position: absolute;
+    line-height: 2;
+    text-align: center;
+    top: 50vh;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .static-map {
+    display: block;
+    width: 100%;
+    max-width: 600px; // 根据设计调整
+    height: auto;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
