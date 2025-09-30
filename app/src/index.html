@@ -186,22 +186,26 @@
     <!-- 第八页 -->
     <div class="swiper-slide slide-8">
       <div class="slide-8-bg"></div>
-      <div class="slide-8-en animated" data-ani-delay="0s" data-ani-duration="2s" data-ani-name="slideInRight"></div>
+      <div class="slide-8-en animated" data-ani-delay="0s" data-ani-duration="2s" data-ani-name="zoomIn" id="countdown-timer"></div>
       <div class="slide-8-text-area">
         <div class="slide-8-text-area-1 animated" data-ani-delay="0s" data-ani-duration="2s"
-             data-ani-name="slideInRight">
+             data-ani-name="zoomIn">
           宴会时间: <br>
           2025年10月18日 18:00
         </div>
         <div class="slide-8-text-area-2 animated" data-ani-delay="0s" data-ani-duration="2s"
-             data-ani-name="slideInRight">
+             data-ani-name="zoomIn">
           宴会地点:
         </div>
         <div class="slide-8-map-link animated" data-ani-delay="0s" data-ani-duration="2s"
-             data-ani-name="slideInRight">
-          <a href="https://uri.amap.com/marker?position=120.727064,28.852743&name=仙居臻品安福酒店&src=myapp" target="_blank">点击查看地图（高德）</a>
-          <a href="https://api.map.baidu.com/marker?location=28.852743,120.727064&title=仙居臻品安福酒店&content=仙居臻品安福酒店&output=html&src=myapp" target="_blank">点击查看地图（百度）</a>
-          <a href="https://apis.map.qq.com/uri/v1/marker?marker=coord:28.852743,120.727064;title:仙居臻品安福酒店;addr:仙居臻品安福酒店&referer=myapp" target="_blank">点击查看地图（腾讯）</a>
+             data-ani-name="zoomIn">
+          📍：仙居臻品安福酒店
+          <br>
+          <a href="https://uri.amap.com/marker?position=120.727064,28.852743&name=仙居臻品安福酒店&src=myapp" target="_blank">用(高德)地图打开</a>
+          <br>
+          <a href="https://api.map.baidu.com/marker?location=28.852743,120.727064&title=仙居臻品安福酒店&content=仙居臻品安福酒店&output=html&src=myapp" target="_blank">用(百度)地图打开</a>
+          <br>
+          <a href="https://apis.map.qq.com/uri/v1/marker?marker=coord:28.852743,120.727064;title:仙居臻品安福酒店;addr:仙居臻品安福酒店&referer=myapp" target="_blank">用(腾讯)地图打开</a>
         </div>
       </div>
     </div>
@@ -227,6 +231,32 @@
 <!-- inject:js -->
 <!-- endinject -->
 
+<script>
+  // 设置目标时间：2025年10月18日 18:00
+  const targetDate = new Date('2025-10-18T18:00:00');
+
+  function updateCountdown() {
+    const now = new Date();
+    const timeLeft = targetDate - now;
+
+    if (timeLeft <= 0) {
+      document.getElementById('countdown-timer').innerHTML = '宴会已经开始！';
+      return;
+    }
+
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    document.getElementById('countdown-timer').innerHTML = `倒计时:<br> ${days}天 ${hours}小时 ${minutes}分钟 ${seconds}秒`;
+  }
+
+  // 初始更新倒计时
+  updateCountdown();
+  // 每秒更新一次
+  setInterval(updateCountdown, 1000);
+</script>
 </body>
 
 </html>
