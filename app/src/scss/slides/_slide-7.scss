@@ -23,6 +23,7 @@
     padding: 0.13333rem;
     text-indent: 0;
     writing-mode: lr-tb;
+    @extend .custom-font-love;
   }
 
   .slide-7-en {
@@ -44,6 +45,7 @@
     text-align: center;
     text-indent: 0;
     writing-mode: lr-tb;
+    @extend .custom-font-love;
   }
 
   .horizontalAlignment{
